@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import AllAuthors from './components/AllAuthors';
+import CreateAuthor from './components/CreateAuthor';
+import {Routes, Route, Link} from 'react-router-dom';
+import { useState } from 'react';
+import EditAuthor from './components/EditAuthor';
+
 
 function App() {
+
+  let [formSubmitted, setFormSubmitted] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container mt-3">
+      <h1>Favorite Authors</h1>
+      <Routes>
+
+        <Route exact path="/" element={<AllAuthors formSubmitted={formSubmitted} setFormSubmitted={setFormSubmitted} />} />
+
+        <Route exact path="/new" element={<CreateAuthor formSubmitted={formSubmitted} setFormSubmitted={setFormSubmitted}/>} />
+
+        <Route exact path="/:_id" element={<EditAuthor />} />
+
+      </Routes>
     </div>
   );
 }
